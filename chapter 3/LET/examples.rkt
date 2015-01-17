@@ -58,12 +58,3 @@
     (display "\n----------------\n")))
 
 (define examples (list p1 p2 p3 p4 p5 p6 p7 p9 p10)) ; not p8 because it fails
-
-;;; Exercise 3.6
-
-(define ex306
-  (a-program (let-exp 'y (minus-exp (const-exp 10)) (var-exp 'y))))
-
-;;; Exercise 3.8
-(define ex308
-  (a-program (let-exp 'a (minus-exp (const-exp 10)) (let-exp 'b (diff-exp (const-exp 0) (const-exp 10)) (equal?-exp (var-exp 'a) (var-exp 'b))))))

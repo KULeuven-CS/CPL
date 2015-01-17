@@ -1,7 +1,6 @@
 #lang eopl
 (require rackunit)
 
-;;; Exercise 2.21
 (define-datatype environment environment?
   (empty-env)
   (non-emty-env
@@ -13,6 +12,7 @@
   (lambda (var val env)
     (non-emty-env var val env)))
 
+;;; Exercise 2.21
 (define apply-env
   (lambda (search-env search-var)
     (cases environment search-env
@@ -34,7 +34,6 @@
 (check-equal? (apply-env (extend-env 'a 'b (empty-env)) 'a) 'b)
 (check-equal? (apply-env (extend-env 'c 'd (extend-env 'a 'b (empty-env))) 'a) 'b)
 
-;;; Exercise 2.21
 (define has-binding?
   (lambda (search-env search-var)
     (cases environment search-env
