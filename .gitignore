@@ -1,0 +1,11 @@
+/build/
+/bundle/
+/add-on/
+/extra-pkgs/
+compiled/
+*~
+\#*
+.#*
+.DS_Store
+*.bak
+TAGS
