@@ -102,7 +102,7 @@
                     (num-val
                      (- num1 num2)))))
       
-      (minus-exp (exp1)
+      (minus-exp (exp1) ;3.6 addition
                  (let ((val1 (value-of exp1 env)))
                    (let ((num1 (expval->num val1)))
                      (num-val (- 0 num1)))))

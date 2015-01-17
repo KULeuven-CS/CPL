@@ -8,9 +8,9 @@
 (define-datatype expression expression?
   (const-exp (num number?))
   (diff-exp (exp1 expression?) (exp2 expression?))
-  (minus-exp (exp1 expression?))
+  (minus-exp (exp1 expression?)) ; 3.6 addition
   (zero?-exp (exp1 expression?))
-  (equal?-exp (exp1 expression?) (exp2 expression?))
+  (equal?-exp (exp1 expression?) (exp2 expression?)) ; 3.8 addition
   (if-exp
    (exp1 expression?)
    (exp2 expression?)
@@ -34,12 +34,12 @@
                 (let ((val1 (exp->string exp1))
                       (val2 (exp->string exp2)))
                   (string-append "(" val1 " - " val2 ")")))
-      (minus-exp (exp1)
+      (minus-exp (exp1) ;3.6 addition
                  (let ((val1 (exp->string exp1))) (string-append "(- " val1 ")")))
       (zero?-exp (exp1)
                  (let ((val1 (exp->string exp1 )))
                    (string-append "zero? " val1)))
-      (equal?-exp (exp1 exp2)
+      (equal?-exp (exp1 exp2) ;3.8 addition
                   (let ((val1 (exp->string exp1))
                         (val2 (exp->string exp2)))
                     (string-append "equal? " val1 " " val2)))
@@ -55,5 +55,3 @@
                  (string-append "let " (symbol->string var) " = " val1 " in " val2) ))
       
       ))
-
-
