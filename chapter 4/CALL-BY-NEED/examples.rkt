@@ -2,12 +2,12 @@
 (require "syntax.rkt")
 (require "CALL-BY-NEED.rkt")
 
-;(define ep136
+; Example page 136
 ;	letrec infinite-loop (x) = infinite-loop(- (x,-1)))
 ;	in let f = proc (z) 11
 ;		in (f (infinite-loop 0))
 
-
+; Syntax repesentation of example page 136
 (define ep136
   (a-program (letrec-exp 
               (list 'infinite-loop)
@@ -25,11 +25,6 @@
 				  (call-exp 
                                    (var-exp 'infinite-loop)
                                    (const-exp 0)))))))
-
-(define test
-  (a-program (const-exp 0)))
-
-
 
 (define run
   (lambda (prgm)

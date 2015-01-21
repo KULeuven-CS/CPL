@@ -145,17 +145,9 @@
 (define value-of-operand 
   (lambda (exp env)
 	(cases expression exp
-		(var-exp (var)
-				 (let ((ref1 (apply-env env var)))
-				   (let ((w (deref ref1)))
-					(if (expval? w)
-						w
-						(let ((val1 (value-of-thunk w)))
-						  (begin
-							(setref! ref1 val1)
-							val1))))))
+		(var-exp (var) (apply-env env var)) ;Operand that is already referenced (and thunked)
 		(else
-		  (newref (a-thunk exp env))))))
+		  (newref (a-thunk exp env)))))) ;Create new thunk for the actual expression
 
 
 (define value-of-thunk
@@ -170,7 +162,15 @@
     (lambda (exp env)
       (cases expression exp
         (const-exp (num) (num-val num))
-        (var-exp (var) (apply-env env var))
+		(var-exp (var) ; Evaluate thunk when the referenced var is one.
+				 (let ((ref1 (apply-env env var)))
+				   (let ((w (deref ref1)))
+					(if (expval? w)
+						w ;Referenced val is an actual expression
+						(let ((val1 (value-of-thunk w))) ;Evaluate thunk and update ref1
+						  (begin
+							(setref! ref1 val1)
+							val1))))))
         (diff-exp (exp1 exp2)
                   (let ((val1 (value-of exp1 env))
                         (val2 (value-of exp2 env)))
@@ -197,7 +197,8 @@
                   (proc-val (procedure var body env)))
         (call-exp (rator rand)
                   (let ((proc (expval->proc (value-of rator env)))
-                        (arg (value-of rand env)))
+                      ;  (arg (rand env)))
+                        (arg (value-of-operand rand env))) ; store thunk as bound operand
                     (apply-procedure proc arg)))
         (letrec-exp (p-names b-vars p-bodies letrec-body)
           (value-of letrec-body
@@ -238,4 +239,3 @@
       (cases proc proc1
         (procedure (var body saved-env)
                    (value-of body (extend-env var val saved-env))))))
-  
