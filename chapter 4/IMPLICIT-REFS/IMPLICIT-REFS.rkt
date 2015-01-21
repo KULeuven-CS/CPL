@@ -126,59 +126,13 @@
       (a-program (exp1)
                  (value-of exp1 (init-env))))))
 
-;; BASED ON IMPLICIT-REFS
-;===========CHANGES=FROM=HERE=============
-;; Additions of CALL-BY-NEED see p 137,138
-
-;; Define new thunk datatype 
-(define-datatype thunk thunk? 
-	(a-thunk
-		(exp1 expression?)
-		(env environment?)))
-
-;; Returns the proper bound value references of an
-;;	operand at function call-time. 
-;;	In the case that this operand is already thunked
-;;	the reference in the given Env is returned
-;; value-of-operand : Exp * Env -> Ref 
-(define value-of-operand 
-  (lambda (exp env)
-	(cases expression exp
-		(var-exp (var) (apply-env env var)) ;Operand that is already referenced (and thunked)
-		(else
-		  (newref (a-thunk exp env)))))) ;Create new thunk for the actual expression
-
-;; Evalutes the given thunk to an actual value. 
-;; value-of-thunk : Thunk -> ExpVal
-(define value-of-thunk
-  (lambda (th)
-	(cases thunk th
-		   (a-thunk (exp1 saved-env)
-					(value-of exp1 saved-env)))))
-
 ;; value-of : Exp * Env -> ExpVal
 ;; Page: 71
 (define value-of
   (lambda (exp env)
     (cases expression exp
       (const-exp (num) (num-val num))
-	  ;; CALL-BY-NAME implementation 
-	  ; (var-exp (var)
-		; 		(let ((ref1 (apply-env env var)))
-		; 		  (let ((w (deref ref1)))
-		; 			(if (expval? w)
-		; 			  w
-		; 			  (value-of-thunk w)))))
-	  ; CALL-BY-NEED used
-	  (var-exp (var) ; Evaluate thunk when the referenced var is one.
-				(let ((ref1 (apply-env env var)))
-				  (let ((w (deref ref1)))
-					(if (expval? w)
-					  w ;Referenced val is an actual expression already
-					  (let ((val1 (value-of-thunk w))) ;Evaluate thunk and update ref1
-						(begin
-						  (setref! ref1 val1)
-						  val1))))))
+      (var-exp (var) (deref (apply-env env var)))
       (diff-exp (exp1 exp2)
                 (let ((val1 (value-of exp1 env))
                       (val2 (value-of exp2 env)))
@@ -205,8 +159,7 @@
                 (proc-val (procedure var body env)))
       (call-exp (rator rand)
                 (let ((proc (expval->proc (value-of rator env)))
-                      ; (arg (value-of rand env)))
-					  (arg (value-of-operand rand env))) ; Store thunk as bound operand
+                      (arg (value-of rand env)))
                   (apply-procedure proc arg)))
       (letrec-exp (p-names b-vars p-bodies letrec-body)
                   (value-of letrec-body

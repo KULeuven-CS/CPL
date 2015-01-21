@@ -1,12 +1,14 @@
 #lang eopl
 (require "syntax.rkt")
 (require "CALL-BY-NEED.rkt")
+(require "store.rkt")
+
+;All IMPLICIT-REFS examples should also work.
 
 ; Example page 136
 ;	letrec infinite-loop (x) = infinite-loop(- (x,-1)))
 ;	in let f = proc (z) 11
 ;		in (f (infinite-loop 0))
-
 ; Syntax repesentation of example page 136
 (define ep136
   (a-program (letrec-exp 
