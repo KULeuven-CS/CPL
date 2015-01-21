@@ -202,7 +202,7 @@
                            (extend-env var (newref v1) env))))      
       (letlaz-exp (var exp1 body) ; LETLAZ case
                  (value-of body
-                           (extend-env var (newref (a-thunk exp env)) env)))      
+                           (extend-env var (newref (a-thunk exp1 env)) env)))      
       (proc-exp (var body)
                 (proc-val (procedure var body env)))
       (call-exp (rator rand)

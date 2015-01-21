@@ -19,7 +19,7 @@
                (diff-exp 
                 (var-exp 'x)	
                 (const-exp -1))))
-              (let-exp 
+              (letlaz-exp 
 				'f
 				(proc-exp 'z (const-exp 11))
 				(call-exp 
@@ -28,6 +28,33 @@
                                    (var-exp 'infinite-loop)
                                    (const-exp 0)))))))
 
+(define letfails 
+   (a-program (letrec-exp 
+              (list 'infinite-loop)
+              (list 'x)
+              (list (call-exp 
+               (var-exp 'infinite-loop) 
+               (diff-exp 
+                (var-exp 'x)	
+                (const-exp -1))))
+              (let-exp 
+				'f ;Evaluating f first would give an infinite loop.
+				(call-exp (var-exp 'infinite-loop) (const-exp 99))
+				(const-exp 0))))) ; which it does with let-exp.
+
+(define letlazworks 
+   (a-program (letrec-exp 
+              (list 'infinite-loop)
+              (list 'x)
+              (list (call-exp 
+               (var-exp 'infinite-loop) 
+               (diff-exp 
+                (var-exp 'x)	
+                (const-exp -1))))
+              (letlaz-exp 
+				'f ;Evaluating f first would give an infinite loop.
+				(call-exp (var-exp 'infinite-loop) (const-exp 99))
+				(const-exp 0))))) ; but letlaz so returns 0.
 (define run
   (lambda (prgm)
 	(value-of-program prgm)))
