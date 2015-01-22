@@ -37,11 +37,11 @@
 (define c 
 	(a-program 
 	  (if-exp 
-		(zero?-exp (var-exp 'f)
+		(zero?-exp (var-exp 'f))
 		(diff-exp 
 		  (const-exp 100)
 		  (var-exp 'f))
-		(zero?-exp (const-exp 1))))))
+		(zero?-exp (const-exp 1)))))
 
 ; (let f (const-exp 0) 
 ;   (check-equal?  (type-of-program c) (int-type)))
