@@ -13,15 +13,30 @@
 	  (diff-exp
 		(const-exp 3)
 		(const-exp 5))))
-(check-equal? )
+(check-equal? (type-of-program a) (int-type))
 
 ;b) (int -> int) -> (int ->bool)
-(a-program let)
+(define b
+	(a-program 
+	  (proc-exp 'arg1 (no-type)
+		(proc-exp 'arg2 (no-type)
+		 (zero?-exp 
+		   (diff-exp 
+			 (call-exp 
+			   (var-exp 'arg1)
+			   (const-exp 0))
+			 (var-exp 'arg2)))))))
+
+(check-equal? 
+  (type-of-program b) 
+  (proc-type 
+	(proc-type (int-type) (int-type))
+	(proc-type (int-type) (bool-type))))
 ;c) %1
 (a-program )
 ;d) (%1 -> %2) -> (%2 -> int) -> (%1 -> bool)
-(a-program )
+;(a-program )
 ;e) %1 -> %2
-(a-program )
+;(a-program )
 ;f) (%1 -> %2) -> %1
-(a-program )
+;(a-program )
