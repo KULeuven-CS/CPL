@@ -7,6 +7,7 @@
 
 ;; Given the following types below. 
 ;;	Write for each a program that would have the given type according to the INFERRED language
+;; Notice: %x is a var-type
 ;a) int
 (define a
 	(a-program 
@@ -33,7 +34,19 @@
 	(proc-type (int-type) (int-type))
 	(proc-type (int-type) (bool-type))))
 ;c) %1
-(a-program )
+(define c 
+	(a-program 
+	  (if-exp 
+		(zero?-exp (var-exp 'f)
+		(diff-exp 
+		  (const-exp 100)
+		  (var-exp 'f))
+		(zero?-exp (const-exp 1))))))
+
+; (let f (const-exp 0) 
+;   (check-equal?  (type-of-program c) (int-type)))
+; (let f (const-exp 1) 
+;   (check-equal?  (type-of-program c) (bool-type)))
 ;d) (%1 -> %2) -> (%2 -> int) -> (%1 -> bool)
 ;(a-program )
 ;e) %1 -> %2
