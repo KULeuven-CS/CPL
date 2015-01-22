@@ -34,33 +34,40 @@
 	(proc-type (int-type) (int-type))
 	(proc-type (int-type) (bool-type))))
 ;c) %1
+; With letrec we can give an unspecified 
+; return type of the function we are defining
+(define c 
+  (a-program 
+   (letrec-exp (no-type) ; Proc return type
+			   'f ; Proc name
+			   'x ; Proc arg name
+			   (no-type) ; Proc arg type
+			   (call-exp (var-exp 'f) (var-exp 'x)) ; Proc arg body
+			   (call-exp (var-exp 'f) (const-exp 3))))) ; Letrec body, type of f.
 
-;Option 1
-;Type depends on type of var 'f
-(define c1
-	(a-program 
-	  (if-exp 
-		(zero?-exp (var-exp 'f))
-		(diff-exp 
-		  (const-exp 100)
-		  (var-exp 'f))
-		(zero?-exp (const-exp 1)))))
-
-;Option 2 actually a %1 -> %1 program
-;but it's result is a variable type
-(define c2
-  (a-program
-	(proc-exp 'arg (no-type)
-			  (var-exp 'arg))))
-;Option 3 just a var-exp on which the program type depends.
-(define c3
-  (a-program (var-exp 'arg)))
-
-;Yet neither seems completley right.
+(check-equal? 
+  (tvar-type? (type-of-program c))
+  #t)
 
 ;d) (%1 -> %2) -> (%2 -> int) -> (%1 -> bool)
-;(a-program )
+;
+
 ;e) %1 -> %2
+(define e 
+  (a-program 
+   (letrec-exp (no-type) ; Proc return type
+			   'f ; Proc name
+			   'x ; Proc arg name
+			   (no-type) ; Proc arg type
+			   (call-exp (var-exp 'f) (var-exp 'x)) ; Proc arg body
+			   (var-exp 'f)))) ; Letrec body, a function
+
+(check-equal? 
+  (cases type (type-of-program e)
+		 (proc-type (t1 t2) (not (equal? t1 t2)))
+		 (else #f))
+  #t)
+
 ;(a-program )
 ;f) (%1 -> %2) -> %1
 ;(a-program )
