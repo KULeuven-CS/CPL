@@ -67,16 +67,9 @@
 
 ;(a-program )
 ;f) (%1 -> %2) -> %1
-(define p24
-  (a-program 
-   (proc-exp 'c (no-type) 
-			 (proc-exp 'b (no-type) 
-					   (proc-exp 'a (no-type) 
-								 (call-exp 
-								   (call-exp (var-exp 'c) (var-exp 'b)) 
-								   (call-exp (var-exp 'b) (var-exp 'a))) ) ) )))
+; candidates for conversion p17 and p24 from examples
 ; couldn't figure it out so far.
-; (define f
+; (define f2
 ;   (a-program 
 ; 	(proc-exp 'f (no-type) ; return function f with unspecified type.
 ; 			  (letrec-exp 
@@ -91,8 +84,7 @@
 ; 				(call-exp 
 ; 				  (var-exp 'n)
 ; 				  (var-exp 'f))))))
-;
-; (define f2
+; (define f3
 ;  (let-exp 'r
 ; 		(proc-exp 'f 
 ; 				  (no-type)
