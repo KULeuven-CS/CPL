@@ -34,7 +34,10 @@
 	(proc-type (int-type) (int-type))
 	(proc-type (int-type) (bool-type))))
 ;c) %1
-(define c 
+
+;Option 1
+;Type depends on type of var 'f
+(define c1
 	(a-program 
 	  (if-exp 
 		(zero?-exp (var-exp 'f))
@@ -43,10 +46,18 @@
 		  (var-exp 'f))
 		(zero?-exp (const-exp 1)))))
 
-; (let f (const-exp 0) 
-;   (check-equal?  (type-of-program c) (int-type)))
-; (let f (const-exp 1) 
-;   (check-equal?  (type-of-program c) (bool-type)))
+;Option 2 actually a %1 -> %1 program
+;but it's result is a variable type
+(define c2
+  (a-program
+	(proc-exp 'arg (no-type)
+			  (var-exp 'arg))))
+;Option 3 just a var-exp on which the program type depends.
+(define c3
+  (a-program (var-exp 'arg)))
+
+;Yet neither seems completley right.
+
 ;d) (%1 -> %2) -> (%2 -> int) -> (%1 -> bool)
 ;(a-program )
 ;e) %1 -> %2
