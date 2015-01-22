@@ -5,3 +5,5 @@ Solutions for the exercises in the book [**Essentials of Programming Languages**
 All the solutions to the exercises will be implemented in the [eopl](http://docs.racket-lang.org/eopl/) scheme dialect supported by the [Dr.Racket programming environment](http://docs.racket-lang.org/drracket/). 
 
 As additional resource you can visit [this](https://github.com/chenyukang/eopl/) repository which has (most of) them implemented in a different dialect.
+
+The questions for the exam can be found at the [WINA exam wiki](https://wiki.wina.be/examens/index.php/Comparative_Programming_Languages) and/or the [VTK exam wiki](https://wiki.vtk.be/Comparative_Programming_Languages_%28H04L5A%29).
