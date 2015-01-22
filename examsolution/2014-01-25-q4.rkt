@@ -45,9 +45,7 @@
 			   (call-exp (var-exp 'f) (var-exp 'x)) ; Proc arg body
 			   (call-exp (var-exp 'f) (const-exp 3))))) ; Letrec body, type of f.
 
-(check-equal? 
-  (tvar-type? (type-of-program c))
-  #t)
+(check-true (tvar-type? (type-of-program c)))
 
 ;d) (%1 -> %2) -> (%2 -> int) -> (%1 -> bool)
 ;
@@ -62,12 +60,41 @@
 			   (call-exp (var-exp 'f) (var-exp 'x)) ; Proc arg body
 			   (var-exp 'f)))) ; Letrec body, a function
 
-(check-equal? 
+(check-true
   (cases type (type-of-program e)
 		 (proc-type (t1 t2) (not (equal? t1 t2)))
-		 (else #f))
-  #t)
+		 (else #f)))
 
 ;(a-program )
 ;f) (%1 -> %2) -> %1
-;(a-program )
+(define p24
+  (a-program 
+   (proc-exp 'c (no-type) 
+			 (proc-exp 'b (no-type) 
+					   (proc-exp 'a (no-type) 
+								 (call-exp 
+								   (call-exp (var-exp 'c) (var-exp 'b)) 
+								   (call-exp (var-exp 'b) (var-exp 'a))) ) ) )))
+; couldn't figure it out so far.
+; (define f
+;   (a-program 
+; 	(proc-exp 'f (no-type) ; return function f with unspecified type.
+; 			  (letrec-exp 
+; 				(no-type) ; return type of some function that should match 2
+; 				'n; name of some function
+; 				'arg1 ; name argument that should match 1
+; 				(no-type)
+; 				(let-exp
+; 				  'x
+; 				  (call-exp (var-exp 'f) (var-exp 'arg1))
+; 				  (var-exp 'arg1))
+; 				(call-exp 
+; 				  (var-exp 'n)
+; 				  (var-exp 'f))))))
+;
+; (define f2
+;  (let-exp 'r
+; 		(proc-exp 'f 
+; 				  (no-type)
+; 				  (proc-exp 'x (no-type) (call-exp (var-exp 'f) (call-exp (var-exp 'f) (var-exp 'x)))))
+; 		(var-exp 'r)))
