@@ -7,3 +7,6 @@ All the solutions to the exercises will be implemented in the [eopl](http://docs
 As additional resource you can visit [this](https://github.com/chenyukang/eopl/) repository which has (most of) them implemented in a different dialect.
 
 The questions for the exam can be found at the [WINA exam wiki](https://wiki.wina.be/examens/index.php/Comparative_Programming_Languages) and/or the [VTK exam wiki](https://wiki.vtk.be/Comparative_Programming_Languages_%28H04L5A%29).
+
+The pdf file (for printing) of most interpreters and some additions can be found here:
+[![PDF Status](https://www.sharelatex.com/github/repos/KULeuven-CS/CPL/builds/latest/badge.svg)](https://www.sharelatex.com/github/repos/KULeuven-CS/CPL/builds/latest/output.pdf)
