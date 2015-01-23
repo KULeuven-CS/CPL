@@ -1,6 +1,7 @@
 #lang eopl
 (require "syntax.rkt")
-(require "store.rkt")
+;(require "store.rkt")
+(require "../EXPLICIT-REFS/store.rkt")
 (provide (all-defined-out))
 
 ;; Semantics
@@ -194,6 +195,7 @@
                 (if (expval->bool val1)
                     (value-of exp2 env)
                     (value-of exp3 env))))
+	; ...
 	;; BASED ON CALL-BY-NEED (IMPLICIT-REFS)
 	;===========CHANGES=FROM=HERE=============
       (let-exp (var exp1 body)       
@@ -203,6 +205,7 @@
       (letlaz-exp (var exp1 body) ; LETLAZ case
                  (value-of body
                            (extend-env var (newref (a-thunk exp1 env)) env)))      
+	; ...
       (proc-exp (var body)
                 (proc-val (procedure var body env)))
       (call-exp (rator rand)

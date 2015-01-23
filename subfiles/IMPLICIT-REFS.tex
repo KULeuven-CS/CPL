@@ -7,8 +7,13 @@ The store (same as EXPLICIT-REFS) can be found in \autoref{store} on page \pager
 \lstinputlisting[firstline=5, lastline=37, caption=Syntax file for IMPLICIT-REFS]{chapter3/LETREC/syntax.rkt}
 
 \subsection{CALL-BY-NEED}
-Lazy evaluation for IMPLICIT-REFS (see \autoref{lang:IMPLICIT-REFS}) only relevant changes to the interpreter are shown the store is entirely the same.
+\label{lang:CALL-BY-NEED}
+Lazy evaluation for IMPLICIT-REFS (see \autoref{lang:IMPLICIT-REFS}) only relevant changes to the interpreter are shown, the store and syntax is entirely the same.
 \lstinputlisting[linerange={130-183,208-214}, caption=The CALL-BY-NEED interpreter]{chapter4/CALL-BY-NEED/CALL-BY-NEED.rkt}
 
-
+\subsection{CALL-BY-NEED and LETLAZ}
+\label{lang:CALL-BY-NEED-LETLAZ}
+Adding a lazy let evaluation to CALL-BY-NEED (see \autoref{lang:CALL-BY-NEED}). Additions to the syntax file and interpreter are shown the store is entirely the same.
+\lstinputlisting[linerange={159-161,198-208}, caption=Interpreter addition for LETLAZ to CALL-BY-NEED.]{chapter4/4.42-CALL-BY-NEED-LETLAZ/CALL-BY-NEED-LETLAZ.rkt}
+\lstinputlisting[linerange={9-9,22-27}, caption=Syntax addition of LETLAZ.]{chapter4/4.42-CALL-BY-NEED-LETLAZ/syntax.rkt}
 \end{document}

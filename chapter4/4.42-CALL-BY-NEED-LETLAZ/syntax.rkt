@@ -19,10 +19,12 @@
    (var symbol?)
    (exp1 expression?)
    (body expression?))
+  ; ...
   (letlaz-exp ; LAZY LET!!
    (var symbol?)
    (exp1 expression?)
    (body expression?))
+  ; ...
   (proc-exp
    (var symbol?)
    (body expression?))
