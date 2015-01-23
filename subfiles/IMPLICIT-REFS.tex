@@ -1,0 +1,14 @@
+\documentclass[../codeprint.tex]{subfiles}
+\begin{document}
+\subsection{Plain IMPLICIT-REFS}
+\label{lang:IMPLICIT-REFS}
+The store (same as EXPLICIT-REFS) can be found in \autoref{store} on page \pageref{store}.
+\lstinputlisting[caption=The IMPLICIT-REFS interpreter]{chapter4/IMPLICIT-REFS/IMPLICIT-REFS.rkt}
+\lstinputlisting[firstline=5, lastline=37, caption=Syntax file for IMPLICIT-REFS]{chapter3/LETREC/syntax.rkt}
+
+\subsection{CALL-BY-NEED}
+Lazy evaluation for IMPLICIT-REFS (see \autoref{lang:IMPLICIT-REFS}) only relevant changes to the interpreter are shown the store is entirely the same.
+\lstinputlisting[linerange={130-183,208-214}, caption=The CALL-BY-NEED interpreter]{chapter4/CALL-BY-NEED/CALL-BY-NEED.rkt}
+
+
+\end{document}

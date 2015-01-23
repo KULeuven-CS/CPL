@@ -1,7 +1,7 @@
 #lang eopl
 (require "syntax.rkt")
 (require "CALL-BY-NEED.rkt")
-(require "store.rkt")
+(require "../EXPLICIT-REFS/store.rkt")
 
 ;All IMPLICIT-REFS examples should also work.
 

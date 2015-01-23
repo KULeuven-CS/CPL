@@ -1,6 +1,7 @@
 #lang eopl
 (require "syntax.rkt")
-(require "store.rkt")
+;(require "store.rkt")
+(require "../EXPLICIT-REFS/store.rkt")
 (provide (all-defined-out))
 
 ;; Semantics
@@ -126,6 +127,7 @@
       (a-program (exp1)
                  (value-of exp1 (init-env))))))
 
+;; ...
 ;; BASED ON IMPLICIT-REFS
 ;===========CHANGES=FROM=HERE=============
 ;; Additions of CALL-BY-NEED see p 137,138
@@ -203,11 +205,13 @@
                            (extend-env var (newref v1) env))))      
       (proc-exp (var body)
                 (proc-val (procedure var body env)))
+	  ; ...
       (call-exp (rator rand)
                 (let ((proc (expval->proc (value-of rator env)))
                       ; (arg (value-of rand env)))
 					  (arg (value-of-operand rand env))) ; Store thunk as bound operand
                   (apply-procedure proc arg)))
+	  ; ...
       (letrec-exp (p-names b-vars p-bodies letrec-body)
                   (value-of letrec-body
                             (extend-env-rec* p-names b-vars p-bodies env)))
