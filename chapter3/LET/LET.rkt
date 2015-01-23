@@ -39,7 +39,6 @@
                 variant value)))
 
 ;; Environments
-
 (define-datatype environment environment?
   (empty-env)
   (extend-env 
@@ -63,7 +62,6 @@
 ;; expressed value 1, v is bound to the expressed value 5, and x is
 ;; bound to the expressed value 10.
 ;; Page: 69
-
 (define init-env 
   (lambda ()
     (extend-env 
@@ -107,14 +105,14 @@
                    (let ((num1 (expval->num val1)))
                      (num-val (- 0 num1)))))
       
-      (zero?-exp (exp1)
+      (zero?-exp (exp1) 
                  (let ((val1 (value-of exp1 env)))
                    (let ((num1 (expval->num val1)))
                      (if (zero? num1)
                          (bool-val #t)
                          (bool-val #f)))))
       
-      (equal?-exp (exp1 exp2)
+      (equal?-exp (exp1 exp2) ;3.8 addition
                   (let ((val1 (value-of exp1 env))
                         (val2 (value-of exp2 env)))
                     (if (equal? val1 val2)
