@@ -10,12 +10,22 @@
 \usepackage{textcomp}
 \usepackage{subfiles}
 \usepackage{hyperref}
+
+
+%Bibliography setup
+\usepackage[
+backend=bibtex,
+style=alphabetic,
+sorting=ynt
+]{biblatex}
+
+\addbibresource{codeprint.bib}
  
 % Titleplage
 \title{Code Printing for EOPL}
 \date{\today}
 %TODO: add your name here if you helped.
-\author{Dieter Castel, \\ \ldots} 
+\author{Dieter Castel, \\ Dennis Frett} 
 
 
 % Margins
@@ -103,6 +113,12 @@
 \section{IMPLICIT-REFS}
 \subfile{subfiles/IMPLICIT-REFS.tex}
 
+\section{THREADS}
+\subfile{subfiles/THREADS.tex}
+
 \section{CLASSES}
 \subfile{subfiles/CLASSES.tex}
+
+\nocite{*}
+\printbibliography
 \end{document}

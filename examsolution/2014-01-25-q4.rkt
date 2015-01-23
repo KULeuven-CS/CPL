@@ -65,6 +65,19 @@
 		 (proc-type (t1 t2) (not (equal? t1 t2)))
 		 (else #f)))
 
+(define 'f8
+  (a-program
+   (proc-exp 'g (no-type)
+             (letrec-exp
+              (no-type)
+              'f
+              'a
+              (no-type)
+              (var-exp 'a)
+              (let-exp 'o 
+				(call-exp (var-exp 'g) (var-exp 'f))
+				(var-exp 'g))))))
+
 ;(a-program )
 ;f) (%1 -> %2) -> %1
 ; candidates for conversion p17 and p24 from examples
