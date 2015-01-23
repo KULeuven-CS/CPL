@@ -19,6 +19,16 @@
   (let-exp
    (var symbol?)
    (exp1 expression?)
+   (body expression?))
+  (emptylist-exp)
+  (cons-exp ; 3.9 addition
+   (exp1 expression?)
+   (exp2 expression?))
+  (car-exp
+   (body expression?))
+  (cdr-exp
+   (body expression?))
+  (null?-exp
    (body expression?)))
 
 (define (program->string pgm)
@@ -53,5 +63,19 @@
                (let ((val1 (exp->string exp1))
                      (val2 (exp->string body)))
                  (string-append "let " (symbol->string var) " = " val1 " in " val2) ))
-      
-      ))
+      (emptylist-exp () ;3.9 addition
+               (string-append "emptylist"))
+      (cons-exp (exp1 exp2)
+                (let ((val1 (exp->string exp1))
+                      (val2 (exp->string exp2)))
+		  (string-append "cons " val1 " " val2)))
+      (car-exp (body)
+               (let ((val1 (exp->string body)))
+                     (string-append "car " val1)))
+      (cdr-exp (body)
+               (let ((val1 (exp->string body)))
+                     (string-append "cdr " val1)))
+      (null?-exp (exp)
+	       (let ((val1 (exp->string exp)))
+                     (string-append "null? " val1)))
+	   ))
