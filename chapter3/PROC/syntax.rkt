@@ -18,18 +18,14 @@
    (var symbol?)
    (exp1 expression?)
    (body expression?))
+  ;; NEW wrt LET:  
   (proc-exp
    (var symbol?)
    (body expression?))
   (call-exp
    (rator expression?)
    (rand expression?))
-;... NEW wrt PROC 
-  (letrec-exp
-   (p-name symbol?)
-   (b-var symbol?)
-   (p-body expression?)
-   (letrec-body expression?))
+  
   )
 
 (define (program->string pgm)
@@ -65,10 +61,6 @@
               (let ((val1 (exp->string rator))
                     (val2 (exp->string rand)))
                 (string-append "(" val1 " " val2 ")")))
-    (letrec-exp (p-name b-var p-body letrec-body)
-                (let ((val1 (exp->string p-body))
-                      (val2 (exp->string letrec-body)))
-                  (string-append "letrec " (symbol->string p-name) "(" (symbol->string b-var) ") = " val1 " in " val2)))
     ))
 
 
