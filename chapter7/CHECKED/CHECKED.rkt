@@ -104,6 +104,7 @@
       (a-program (exp1)
                  (value-of exp1 (init-env))))))
 
+; ...
 ;; value-of : Exp * Env -> ExpVal
 ;; Page: 71
 (define value-of
@@ -133,6 +134,7 @@
                (let ((val1 (value-of exp1 env)))
                  (value-of body
                            (extend-env var val1 env))))
+	  ; ... Changes wrt LETREC
       (proc-exp (var ty body)
                 (proc-val (procedure var body env)))
       (call-exp (rator rand)
