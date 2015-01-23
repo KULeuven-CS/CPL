@@ -8,6 +8,7 @@
 \usepackage{xcolor}
 \usepackage{lipsum}
 \usepackage{textcomp}
+\usepackage{subfiles}
  
 % Titleplage
 \title{Code Printing for EOPL}
@@ -52,12 +53,19 @@
 % \lstdefinestyle{}{
 % }
 
+
+%README:
+%Refer to the code that is in this repository
+%Only include those lines of the code that are vital to understanding it
+%Try to reduce tha amount of code as much as you can.
+%If you need to change 3 lines in a syntax file include those lines
+%only with some added context (like in which function you are editing it).
+%If you want to add extra comment add it in the actual language racket file
+
 \begin{document}
 \maketitle
-\setcounter{section}{2}
-\section{Expressions}
-\lstinputlisting[caption=LET interpreter]{../chapter3/LET/LET.rkt}
-\lstinputlisting[firstline=1, lastline=27, caption=Syntax file for LET]{../chapter3/LET/syntax.rkt}
-
-
+\section{LET}
+\subfile{subfiles/LET.tex}
+\section{LETREC}
+%subfile for LETREC
 \end{document}
