@@ -1,6 +1,6 @@
 \documentclass[../codeprint.tex]{subfiles}
 \begin{document}
-\subsection{CHECKED}
+\subsection{CHECKED (ch.7)}
 \label{lang:CHECKED}
 This language is based on LETREC (see \autoref{lang:LETREC}) but adds types and a type checker to check the type of your program.
 It also contains a seperate checker file found in \autoref{checker} on page \pageref{checker}.
@@ -8,7 +8,7 @@ It also contains a seperate checker file found in \autoref{checker} on page \pag
 \lstinputlisting[linerange={1-40}, caption=Syntax definition of the types of CHECKED.]{chapter7/CHECKED/syntax.rkt}
 \lstinputlisting[caption=The actual checker of the CHECKED language., label=checker]{chapter7/CHECKED/checker.rkt}
 
-\subsection{INFERRED}
+\subsection{INFERRED (ch.7)}
 The interpreter is identical to CHECKED (see \autoref{lang:CHECKED}). The syntax adds some optional types to be used in the inferation tool. This tool is able to infer and check the type of a program.
 \lstinputlisting[caption=Inferation tool of the CHECKED (and INFERRED) language(s)., label=infer]{chapter7/INFERRED/infer.rkt}
 \lstinputlisting[linerange={1-83}, caption=Additions and (transparant) changes to the syntax compared to CHECKED.]{chapter7/INFERRED/syntax.rkt}
