@@ -25,17 +25,17 @@
   (call-exp
    (rator expression?)
    (rand expression?))
-  (letrec-exp ; multi-declaration letrec
+  (letrec-exp ; multi-declaration letrec.
    (p-name (list-of symbol?))
    (b-var (list-of symbol?))
    (p-body (list-of expression?))
    (letrec-body expression?))
   (begin-exp (exp1 expression?) (exps (list-of expression?)))
-  (newref-exp
+  (newref-exp ; Explicit reference expression.
    (exp1 expression?))
-  (deref-exp
+  (deref-exp ; Explicit dereference expression.
    (exp1 expression?))  
-  (setref-exp
+  (setref-exp ; Explicit set reference expression.
    (exp1 expression?)
    (exp2 expression?))
   )

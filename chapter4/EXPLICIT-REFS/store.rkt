@@ -96,5 +96,3 @@
                  (list n (car sto))
                  (inner-loop (cdr sto) (+ n 1)))))))
       (inner-loop the-store 0))))
-
-

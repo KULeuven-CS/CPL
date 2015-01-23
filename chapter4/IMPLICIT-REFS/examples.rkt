@@ -1,7 +1,8 @@
 #lang eopl
 (require "syntax.rkt")
 (require "IMPLICIT-REFS.rkt")
-(require "store.rkt")
+;(require "store.rkt")
+(require "../EXPLICIT-REFS/store.rkt")
 
 ;;; Example programs
 

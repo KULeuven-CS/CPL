@@ -1,6 +1,7 @@
 #lang eopl
 (require "syntax.rkt")
-(require "store.rkt")
+;(require "store.rkt")
+(require "../EXPLICIT-REFS/store.rkt")
 (provide (all-defined-out))
 
 ;; Semantics
