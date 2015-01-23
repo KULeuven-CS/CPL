@@ -1,4 +1,4 @@
-\documentclass[11pt,a4paper,oneside]{article}
+\documentclass[11pt,a4paper,twoside]{article}
 % Essential
 \usepackage[english]{babel}
 \usepackage{fancyhdr}
@@ -30,10 +30,10 @@
 \pagestyle{fancy}
 \renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
 \fancyhead{} 
-%\fancyhead[L]{\}
 \fancyhead[R]{\rightmark }
+%\fancyhead[L]{\}
 \fancyfoot{}
-\fancyfoot[R]{\thepage}
+\fancyfoot[LE,RO]{\thepage}
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0.4pt}
 
