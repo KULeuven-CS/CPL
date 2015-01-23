@@ -9,13 +9,20 @@
   (num-val
    (value number?))
   (bool-val
-   (boolean boolean?)))
+   (boolean boolean?))
+  (pair-val ; 3.9 addition
+   (car expval?)
+   (cdr expval?))
+  (emptylist-val))
 
 (define expval->string
   (lambda (v)
     (cases expval v
       (num-val (num) (string-append "Number: " (number->string num)))
-      (bool-val (bool) (string-append "Boolean: " (if bool "#t" "#f"))))))
+      (bool-val (bool) (string-append "Boolean: " (if bool "#t" "#f")))
+      (pair-val (car cdr) (string-append "Pair: "));3.9 addition
+      (emptylist-val () (string-append "Empty list"))
+      )))
 
 ;; expval->num : ExpVal -> Int
 ;; Page: 70
@@ -32,6 +39,25 @@
     (cases expval v
       (bool-val (bool) bool)
       (else (expval-extractor-error 'bool v)))))
+
+; 3.9 addition
+(define expval->car
+  (lambda (v)
+    (cases expval v
+	   (pair-val (car cdr) car)
+	   (else (expval-extractor-error 'car v)))))
+
+(define expval->cdr
+  (lambda (v)
+    (cases expval v
+	   (pair-val (car cdr) cdr)
+	   (else (expval-extractor-error 'cdr v)))))
+
+(define expval->null?
+  (lambda (v)
+    (cases expval v
+	   (emptylist-val () (bool-val #t))
+	   (else (bool-val #f)))))
 
 (define expval-extractor-error
   (lambda (variant value)
@@ -129,5 +155,16 @@
                (let ((val1 (value-of exp1 env)))
                  (value-of body
                            (extend-env var val1 env))))
-      
+      (emptylist-exp () ;3.9 Addition
+			  (emptylist-val))
+      (cons-exp (exp1 exp2)
+		     (let ((val1 (value-of exp1 env))
+			   (val2 (value-of exp2 env)))
+		       (pair-val val1 val2)))
+      (car-exp (body)
+		    (expval->car (value-of body env)))
+      (cdr-exp (body)
+		    (expval->cdr (value-of body env)))
+      (null?-exp (exp)
+		      (expval->null? (value-of exp env))) 
       )))
