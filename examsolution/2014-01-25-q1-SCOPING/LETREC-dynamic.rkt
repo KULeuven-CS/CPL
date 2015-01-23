@@ -18,7 +18,7 @@
 (define-datatype proc proc?
   (procedure
    (var symbol?)
-   (body expression?))) ;; ZONDER SAVED ENV VOOR DYNAMIC!
+   (body expression?))) ;; WITHOUT SAVED ENV FOR DYNAMIC!!
 
 ;; expval->num : ExpVal -> Int
 ;; Page: 70
@@ -132,12 +132,13 @@
                (let ((val1 (value-of exp1 env)))
                  (value-of body
                            (extend-env var val1 env))))
-      (proc-exp (var body)
-                (proc-val (procedure var body))) ;; ENV WORDT NIET BEIJGEHOUDEN
-      (call-exp (rator rand)
+	  ;; ... same as LETREC ...
+      (proc-exp (var body) ;; ENV IS NOT STORED!
+                (proc-val (procedure var body))) 
+      (call-exp (rator rand) ;; CURRENT ENV IS USED AS ENV ON CALL
                      (let ((proc (expval->proc (value-of rator env)))
                            (arg (value-of rand env)))
-                       (apply-procedure proc arg env))) ;; HUIDIGE ENV WORDT GEBRUIKT ALS ENV
+                       (apply-procedure proc arg env))) 
       (letrec-exp (p-name b-var p-body letrec-body)
           (value-of letrec-body
             (extend-env-rec p-name b-var p-body env)))
