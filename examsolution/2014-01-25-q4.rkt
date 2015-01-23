@@ -14,6 +14,7 @@
 	  (diff-exp
 		(const-exp 3)
 		(const-exp 5))))
+
 (check-equal? (type-of-program a) (int-type))
 
 ;b) (int -> int) -> (int ->bool)
@@ -33,6 +34,7 @@
   (proc-type 
 	(proc-type (int-type) (int-type))
 	(proc-type (int-type) (bool-type))))
+
 ;c) %1
 ; With letrec we can give an unspecified 
 ; return type of the function we are defining
@@ -48,7 +50,7 @@
 (check-true (tvar-type? (type-of-program c)))
 
 ;d) (%1 -> %2) -> (%2 -> int) -> (%1 -> bool)
-;
+; ??
 
 ;e) %1 -> %2
 (define e 
@@ -65,23 +67,15 @@
 		 (proc-type (t1 t2) (not (equal? t1 t2)))
 		 (else #f)))
 
-(define 'f8
-  (a-program
-   (proc-exp 'g (no-type)
-             (letrec-exp
-              (no-type)
-              'f
-              'a
-              (no-type)
-              (var-exp 'a)
-              (let-exp 'o 
-				(call-exp (var-exp 'g) (var-exp 'f))
-				(var-exp 'g))))))
 
 ;(a-program )
 ;f) (%1 -> %2) -> %1
 ; candidates for conversion p17 and p24 from examples
 ; couldn't figure it out so far.
+;
+; check-no-occurence!: 
+; Can't unify: type variable "%2" occurs in type "(%2 -> %4)" in expression 
+; #(struct:call-exp #(struct:var-exp n) #(struct:var-exp f))
 ; (define f2
 ;   (a-program 
 ; 	(proc-exp 'f (no-type) ; return function f with unspecified type.
@@ -97,9 +91,25 @@
 ; 				(call-exp 
 ; 				  (var-exp 'n)
 ; 				  (var-exp 'f))))))
+;
+;((%7 -> %7) -> (%7 -> %7))
 ; (define f3
-;  (let-exp 'r
-; 		(proc-exp 'f 
-; 				  (no-type)
-; 				  (proc-exp 'x (no-type) (call-exp (var-exp 'f) (call-exp (var-exp 'f) (var-exp 'x)))))
-; 		(var-exp 'r)))
+;   (a-program 
+; 	 (let-exp 'r
+; 			  (proc-exp 'f 
+; 						(no-type)
+; 						(proc-exp 'x (no-type) (call-exp (var-exp 'f) (call-exp (var-exp 'f) (var-exp 'x)))))
+; 			  (var-exp 'r))))
+; (((%6 -> %6) -> %8) -> ((%6 -> %6) -> %8))
+; (define f8
+;   (a-program
+;    (proc-exp 'g (no-type)
+;              (letrec-exp
+;               (no-type)
+;               'f
+;               'a
+;               (no-type)
+;               (var-exp 'a)
+;               (let-exp 'o 
+; 				(call-exp (var-exp 'g) (var-exp 'f))
+; 				(var-exp 'g))))))

@@ -10,6 +10,8 @@
 \usepackage{textcomp}
 \usepackage{subfiles}
 \usepackage{hyperref}
+%For include full pdfs
+\usepackage{pdfpages}
 
 
 %Bibliography setup
@@ -25,7 +27,7 @@ sorting=ynt
 \title{Code Printing for EOPL}
 \date{\today}
 %TODO: add your name here if you helped.
-\author{Dieter Castel, \\ Dennis Frett} 
+\author{Dieter Castel, \\ Karel Domin, \\ Dennis Frett,} 
 
 
 % Margins
@@ -124,6 +126,13 @@ sorting=ynt
 
 \section{CLASSES (ch.9)}
 \subfile{subfiles/CLASSES.tex}
+
+\section{Exercises}
+\subfile{subfiles/exercises.tex}
+\subsection{Contour diagrams}
+%Contributed by Karel Domin
+\includepdf[pages={1,3-},landscape=false,pagecommand=\thispagestyle{plain}]{subfiles/Exc1.pdf}
+
 
 \nocite{*}
 \printbibliography

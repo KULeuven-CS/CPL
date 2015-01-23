@@ -47,6 +47,23 @@
   (a-program (call-exp (proc-exp 'f (call-exp (var-exp 'f) (call-exp (var-exp 'f) (const-exp 77))))
                        (proc-exp 'x (diff-exp (var-exp 'x) (const-exp 11))))))
 
+;SOURCE:
+;(proc(f)(f (f 77)) proc(x)(x - 11))
+
+;RESULT:
+;#(struct:num-val 55)
+;STORE:
+;((0 #(struct:num-val 1)) 
+;(1 #(struct:num-val 5)) 
+;(2 #(struct:num-val 10)) 
+;(3 #(struct:proc-val ;#(struct:procedure x 
+;#(struct:diff-exp #(struct:var-exp x) #(struct:const-exp 11)) 
+;#(struct:extend-env i 0 #(struct:extend-env v 1 #(struct:extend-env x 2 #(struct:empty-env))))))) 
+;(4 #(struct:num-val 77)) 
+;(5 #(struct:num-val 66)))
+
+
+
 ; let x = 200
 ; in let f = proc(z) (z - x)
 ;    in let x = 100
@@ -146,6 +163,23 @@
                                         )
                                   (begin-exp (var-exp 'f) 
                                              (list (var-exp 'f) (var-exp 'f) )))))
+
+; SOURCE 19:
+; letrec
+; f(x) = 1
+; in
+; begin f;f;f end
+;
+; RESULT:
+; #(struct:proc-val #(struct:procedure x ;	#(struct:const-exp 1) ;	#(struct:extend-env-rec* (f) (x) (#(struct:const-exp 1)) #(struct:extend-env i 0 #(struct:extend-env v 1 #(struct:extend-env x 2 #(struct:empty-env))))))) ;
+; STORE:
+; ((0 #(struct:num-val 1)) 
+; (1 #(struct:num-val 5)) 
+; (2 #(struct:num-val 10)) 
+; (3 #(struct:proc-val #(struct:procedure x #(struct:const-exp 1) #(struct:extend-env-rec* (f) (x) (#(struct:const-exp 1)) #(struct:extend-env i 0 #(struct:extend-env v 1 #(struct:extend-env x 2 #(struct:empty-env)))))))) 
+; (4 #(struct:proc-val #(struct:procedure x #(struct:const-exp 1) #(struct:extend-env-rec* (f) (x) (#(struct:const-exp 1)) #(struct:extend-env i 0 #(struct:extend-env v 1 #(struct:extend-env x 2 #(struct:empty-env)))))))) 
+; (5 #(struct:proc-val #(struct:procedure x #(struct:const-exp 1) #(struct:extend-env-rec* (f) (x) (#(struct:const-exp 1)) #(struct:extend-env i 0 #(struct:extend-env v 1 #(struct:extend-env x 2 #(struct:empty-env)))))))))
+; ----------------------
 
 (define (test p)
   (begin
