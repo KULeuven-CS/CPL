@@ -59,7 +59,9 @@
    (obj-exp expression?)
    (method-name symbol?)
    (rands (list-of expression?)))
-  (instance-of-exp? ; Define new inspector
+  ;... same as CLASSES ...
+  ; Define new inspector
+  (instance-of-exp? 
 	(obj-exp expression?)
 	(class-name symbol?))
   (super-call-exp
@@ -85,7 +87,7 @@
                   )
     ))
 
-(define (method-decl->string md)
+(define (method-decl->stlinerange={1-4,7-9}ring md)
   (cases method-decl md
     (a-method-decl (method-name vars body)
                    (string-append "\nmethod " (symbol->string method-name) 
