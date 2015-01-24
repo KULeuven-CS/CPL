@@ -9,10 +9,9 @@
 \usepackage{lipsum}
 \usepackage{textcomp}
 \usepackage{subfiles}
-\usepackage{hyperref}
-%For include full pdfs
+\usepackage[hidelinks]{hyperref}
 \usepackage{pdfpages}
-
+\usepackage{csquotes}
 
 %Bibliography setup
 \usepackage[
@@ -22,12 +21,12 @@ sorting=ynt
 ]{biblatex}
 
 \addbibresource{codeprint.bib}
- 
+
 % Titleplage
 \title{Code Printing for EOPL}
 \date{\today}
 %TODO: add your name here if you helped.
-\author{Dieter Castel, \\ Karel Domin, \\ Dennis Frett, \\ Jonas Devlieghere,} 
+\author{Dieter Castel, \\ Karel Domin, \\ Dennis Frett, \\ Jonas Devlieghere,}
 
 
 \usepackage{listings}
@@ -49,7 +48,7 @@ sorting=ynt
   frame=single,
   keepspaces=true,
   language=Scheme,
-  morekeywords={cases, equal, eqv, zero, null},
+  morekeywords={cases},
   numbers=left,
   numberstyle=\small\ttfamily\color{gray},
   rulecolor=\color{black},
