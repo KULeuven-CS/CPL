@@ -1,5 +1,5 @@
-\documentclass[11pt,a4paper,twoside]{article}
-% Essential
+\documentclass[11pt,a4paper]{book}
+\usepackage[tmargin=2cm, bmargin=3cm, lmargin=2cm, rmargin=2cm]{geometry}
 \usepackage[english]{babel}
 \usepackage{fancyhdr}
 \usepackage{titling}
@@ -27,27 +27,7 @@ sorting=ynt
 \title{Code Printing for EOPL}
 \date{\today}
 %TODO: add your name here if you helped.
-\author{Dieter Castel, \\ Karel Domin, \\ Dennis Frett,} 
-
-
-% Margins
-\setlength{\topmargin}{0in}
-\setlength{\footskip}{0.5in}
-\setlength{\textwidth}{6.5in}
-\setlength{\oddsidemargin}{0in}
-\setlength{\evensidemargin}{0in}
-\setlength{\textheight}{8.5in}
- 
-% Header configuration
-\pagestyle{fancy}
-\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
-\fancyhead{} 
-\fancyhead[R]{\rightmark }
-%\fancyhead[L]{\}
-\fancyfoot{}
-\fancyfoot[LE,RO]{\thepage}
-\renewcommand{\headrulewidth}{0.4pt}
-\renewcommand{\footrulewidth}{0.4pt}
+\author{Dieter Castel, \\ Karel Domin, \\ Dennis Frett, \\ Jonas Devlieghere,} 
 
 
 \usepackage{listings}
@@ -95,13 +75,21 @@ sorting=ynt
 %If you want to add extra comment add it in the actual language racket file
 
 \begin{document}
+\frontmatter
 \maketitle
 \tableofcontents
+
+\mainmatter
+\setcounter{chapter}{2}
+\chapter{Expressions}
+
 \section{LET (ch.3)}
 \subfile{subfiles/LET.tex}
 
 \section{LETREC (ch.3)}
 \subfile{subfiles/LETREC.tex}
+
+\chapter{State}
 
 \section{EXPLICIT-REFS (ch.4)}
 \subfile{subfiles/EXPLICIT-REFS.tex}
@@ -109,21 +97,33 @@ sorting=ynt
 \section{IMPLICIT-REFS (ch.4)}
 \subfile{subfiles/IMPLICIT-REFS.tex}
 
+\chapter{Continuation-Passing Style}
+
 \section{THREADS (ch.5)}
 \subfile{subfiles/THREADS.tex}
+
+\setcounter{chapter}{6}
+\chapter{Types}
 
 \section{CHECKED (ch.7)}
 \subfile{subfiles/CHECKED.tex}
 
+\chapter{Modules}
+
 \section{SIMPLEMODULES (ch.8)}
 \subfile{subfiles/SIMPLEMODULES.tex}
+
+\chapter{Objects \& Classes}
 
 \section{CLASSES (ch.9)}
 \subfile{subfiles/CLASSES.tex}
 
-\section{Exercises}
+\backmatter
+\appendix
+
+\chapter{Exercises}
 \subfile{subfiles/exercises.tex}
-\subsection{Contour diagrams}
+\section{Contour diagrams}
 %Contributed by Karel Domin
 \includepdf[pages={1,3-},landscape=false,pagecommand=\thispagestyle{plain}]{subfiles/Exc1.pdf}
 
