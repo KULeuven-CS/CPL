@@ -7,3 +7,5 @@
     (if (null? lst)
         '()
         (cons (cons (car lst) '()) (down (cdr lst))))))
+        ; alternative implementation with list:
+        ; (cons (list (car lst)) (down (cdr lst))))))
