@@ -1,6 +1,6 @@
 \documentclass[../codeprint.tex]{subfiles}
 \begin{document}
-\subsection{THREADS: LETREC-CONT and IMPLICIT-REFS with threads (ch.5)}
+\subsection{THREADS: LETREC-CONT and IMPLICIT-REFS with threads}
 This language is a hybrid of LETREC-CONT (see \autoref{continuation}) and IMPLICIT-REFS (see \autoref{lang:IMPLICIT-REFS}) extended with threads. The store is identical to the one we used earlier and can be found in \autoref{store} on page \pageref{store}. It also adds multi declaration letrec and begin-exp. Only some string functions are left out.
 \lstinputlisting[linerange={1-146,178-340}, caption=Interpreter for THREADS.]{chapter5/THREADS/THREADS.rkt}
 \lstinputlisting[linerange={1-50}, caption=.]{chapter5/THREADS/syntax.rkt}
