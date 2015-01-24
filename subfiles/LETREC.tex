@@ -1,6 +1,6 @@
 \documentclass[../codeprint.tex]{subfiles}
 \begin{document}
-\subsection{Plain LETREC (ch.3)}
+\subsection{Plain LETREC}
 \label{lang:LETREC}
 \lstinputlisting[caption=The entire LETREC interpreter]{chapter3/LETREC/LETREC.rkt}
 \lstinputlisting[firstline=1, lastline=33, caption=Syntax file for LETREC]{chapter3/LETREC/syntax.rkt}
@@ -8,15 +8,15 @@
 \subsection{DYNAMIC SCOPING LETREC}
 \label{scoping}
 \lstinputlisting[caption=The entire LETREC interpreter]{chapter3/LETREC/LETREC.rkt}
-\lstinputlisting[linerange={16-21,105-110,135-145}, caption=Dynamic scopign LETREC interpreter.]{examsolution/2014-01-25-q1-SCOPING/LETREC-dynamic.rkt}
-\lstinputlisting[caption=Example of static vs. dynamic scoping.]{examsolution/2014-01-25-q1-SCOPING/scoping.rkt}
+\lstinputlisting[linerange={16-21,105-110,135-145}, caption=Dynamic scopign LETREC interpreter.]{examsolution/SCOPING/LETREC-dynamic.rkt}
+\lstinputlisting[caption=Example of static vs. dynamic scoping.]{examsolution/SCOPING/scoping.rkt}
 
-\subsection{LETREC-CONT: continuation-passing LETREC (ch.5)}
+\subsection{LETREC-CONT: continuation-passing LETREC}
 \label{continuation}
 This implementation is identical to LETREC (see \autoref{lang:LETREC}) except that the control-flow is explicit by making use of continuations. A trampolining interpreter is not shown but can be found at \cite[p.~155-166]{Friedman:2008:EPL:1378240}.
 \lstinputlisting[linerange={104-139,184-275}, caption=Continuation passing interpreter for LETREC.]{chapter5/LETREC-CONT/LETREC-CONT.rkt}
 
-\subsection{LETREC-EXCEP: LETREC with exceptions (ch.5)}
+\subsection{LETREC-EXCEP: LETREC with exceptions}
 This language is LETREC-CONT (see \autoref{continuation}) extended with lists and exceptions.
 \lstinputlisting[linerange={1-146,178-340}, caption=Interpreter for LETREC that supports lists and exceptions.]{chapter5/EXCEPTIONS/EXCEPTIONS.rkt}
 \lstinputlisting[caption=Syntax for LETREC-EXCEP.]{chapter5/EXCEPTIONS/syntax.rkt}
