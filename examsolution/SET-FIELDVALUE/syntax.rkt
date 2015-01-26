@@ -59,6 +59,7 @@
    (obj-exp expression?)
    (method-name symbol?)
    (rands (list-of expression?)))
+  ; ADDTION for q4 of examn 2015-01-24
   ;New for get-fieldvalue and set-fieldvalue
   (get-fieldvalue-exp 
 	(obj-exp expression?)
@@ -150,6 +151,7 @@
     (self-exp () "self")
     (method-call-exp (obj-exp method-name rands)
                      (string-append "send " (exp->string obj-exp) " " (symbol->string method-name) "(" (string-join (map exp->string rands) ",") ")"))
+	; ADDTION for q4 of examn 2015-01-24
 	(get-fieldvalue-exp (obj-exp field-name)
 						(string-append "lel" "lol"))
                      ; (string-append "get-fieldvalue " (exp->string obj-exp) " " (symbol->string field-name)))

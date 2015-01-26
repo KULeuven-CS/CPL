@@ -517,6 +517,7 @@
                           (find-method (object->class-name obj) method-name)
                           obj
                           args))) 
+	  ; ADDTION for q4 of examn 2015-01-24
 	  ;New for get-fieldvalue and set-fieldvalue
 	  (get-fieldvalue-exp (obj-exp field-name)
 						  (let ((field-ref (lookup-fieldref obj-exp field-name env)))
