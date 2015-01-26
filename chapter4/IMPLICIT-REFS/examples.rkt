@@ -46,8 +46,7 @@
 (define p9
   (a-program (call-exp (proc-exp 'f (call-exp (var-exp 'f) (call-exp (var-exp 'f) (const-exp 77))))
                        (proc-exp 'x (diff-exp (var-exp 'x) (const-exp 11))))))
-
-;SOURCE:
+;SOURCE 9:
 ;(proc(f)(f (f 77)) proc(x)(x - 11))
 
 ;RESULT:
