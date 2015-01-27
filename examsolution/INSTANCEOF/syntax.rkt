@@ -87,7 +87,7 @@
                   )
     ))
 
-(define (method-decl->stlinerange={1-4,7-9}ring md)
+(define (method-decl->string md)
   (cases method-decl md
     (a-method-decl (method-name vars body)
                    (string-append "\nmethod " (symbol->string method-name) 
