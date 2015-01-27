@@ -521,14 +521,10 @@
 	  ;New for get-fieldvalue and set-fieldvalue
 	  (get-fieldvalue-exp (obj-exp field-name)
 						  (let ((field-ref (lookup-fieldref obj-exp field-name env)))
-							; Not sure if you should evaluate the expression here
-							; in the question it seemed to be the case. 
-							(value-of (deref field-ref) env)))
+							(deref field-ref)))
 	  (set-fieldvalue-exp (obj-exp field-name expr)
 						  (let ((field-ref (lookup-fieldref obj-exp field-name env))
 								(exp-value (value-of expr env))) 
-							; Not sure if you should evaluate the expression here
-							; in the question it seemed to be the case. 
 							(begin (setref! field-ref exp-value)
 								   (num-val 99)) ; Return arbitrary num-val
 							))
