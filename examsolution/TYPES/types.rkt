@@ -1,9 +1,9 @@
 #lang eopl
 (require racket/base)
 (require rackunit)
-(require "../chapter7/INFERRED/syntax.rkt")
-(require "../chapter7/INFERRED/INFERRED.rkt")
-(require "../chapter7/INFERRED/infer.rkt")
+(require "../../chapter7/INFERRED/syntax.rkt")
+(require "../../chapter7/INFERRED/INFERRED.rkt")
+(require "../../chapter7/INFERRED/infer.rkt")
 
 ;; Given the following types below. 
 ;;	Write for each a program that would have the given type according to the INFERRED language
@@ -50,7 +50,28 @@
 (check-true (tvar-type? (type-of-program c)))
 
 ;d) (%1 -> %2) -> (%2 -> int) -> (%1 -> bool)
-; ??
+; proc(f) proc(g) proc(x) (zero? (g (f x)))
+(define d
+  (a-program
+   (proc-exp 'f (no-type)
+             (proc-exp 'g (no-type)
+                       (proc-exp 'x (no-type)
+                                 (zero?-exp (call-exp (var-exp 'g)
+                                                      (call-exp (var-exp 'f) (var-exp 'x)))))))))
+(let* ((d-type (type-of-program d))
+       (f-type (proc-type->arg-type d-type)) ; Argument of d, should be (%1 -> %2)
+       (t1 (proc-type->arg-type f-type))     ; Argument of f, should be %1
+       (t2 (proc-type->result-type f-type))) ; Result of f, should be %2
+  (check-true (tvar-type? t1))
+  (check-true (tvar-type? t2))
+  (check-equal?
+   d-type
+   (proc-type
+    (proc-type t1 t2)                        ; (%1 -> %2)
+    (proc-type
+     (proc-type t2 (int-type))               ; (%2 -> int)
+     (proc-type t1 (bool-type))))))          ; (%1 -> bool)
+
 
 ;e) %1 -> %2
 (define e 
