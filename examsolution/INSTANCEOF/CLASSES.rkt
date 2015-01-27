@@ -540,8 +540,8 @@
 	  #t
 	  (if (equal? search-name 'object)
 		#f
-		(let ((superclass (lookup-class search-name)))
-		  (instanceof (class->super-name superclass) class-name))))))
+		(let ((search-class (lookup-class search-name)))
+		  (instanceof (class->super-name search-class) class-name))))))
 
 ;; apply-procedure : Proc * Listof(ExpVal) -> ExpVal
 (define apply-procedure
