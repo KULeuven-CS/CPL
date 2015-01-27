@@ -1,9 +1,9 @@
 #lang eopl
 (require racket/base)
 (require rackunit)
-(require "../chapter7/INFERRED/syntax.rkt")
-(require "../chapter7/INFERRED/INFERRED.rkt")
-(require "../chapter7/INFERRED/infer.rkt")
+(require "../../chapter7/INFERRED/syntax.rkt")
+(require "../../chapter7/INFERRED/INFERRED.rkt")
+(require "../../chapter7/INFERRED/infer.rkt")
 
 ;; Given the following types below. 
 ;;	Write for each a program that would have the given type according to the INFERRED language
