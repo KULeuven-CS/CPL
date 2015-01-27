@@ -536,10 +536,10 @@
 ;; instanceof : symbol * symbol -> bool
 (define instanceof
   (lambda (search-name class-name)
-	(if (equal? search-name 'object)
-	  #f
-	  (if (equal? search-name class-name)
-		#t
+	(if (equal? search-name class-name)
+	  #t
+	  (if (equal? search-name 'object)
+		#f
 		(let ((superclass (lookup-class search-name)))
 		  (instanceof (class->super-name superclass) class-name))))))
 

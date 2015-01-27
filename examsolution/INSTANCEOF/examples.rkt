@@ -359,6 +359,38 @@
  (value-of-program instanceof3)
  (bool-val #t))
 
+;Same example as p8 but testing instanceof
+; 'o3 is an instance of (superclass) object so should evaluate to #t
+(define instanceof4
+  (a-program
+   (list
+    (a-class-decl 'c1 'object '()
+                  (list
+                   (a-method-decl 'initialize '() 
+                                  (const-exp 1) )
+                   (a-method-decl 'm1 '() (method-call-exp (self-exp) 'm2 '()) )
+                   (a-method-decl 'm2 '() (const-exp 13) )
+                   ))
+    (a-class-decl 'c2 'c1 '()
+                  (list
+                   (a-method-decl 'm1 '() (const-exp 22) )
+                   (a-method-decl 'm2 '() (const-exp 23) )
+                   (a-method-decl 'm3 '() (super-call-exp 'm1 '()) )
+                   ))
+    (a-class-decl 'c3 'c2 '()
+                  (list
+                   (a-method-decl 'm1 '() (const-exp 32) )
+                   (a-method-decl 'm2 '() (const-exp 33) )
+                                      ))
+    )
+   (let-exp '(o3) 
+            (list (new-object-exp 'c3 (list)))
+            (instance-of-exp? (var-exp 'o3) 'object))))
+
+;Check for instanceof4
+(check-equal?
+ (value-of-program instanceof4)
+ (bool-val #t))
 
 (define (test p)
   (begin
