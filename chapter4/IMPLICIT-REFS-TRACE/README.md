@@ -10,6 +10,8 @@ Extension of IMPLIC-REFS to show traces of what's going on in the environment an
   (a-program (let-exp 'f (proc-exp 'x (diff-exp (var-exp 'x) (const-exp 11)))
                       (call-exp (var-exp 'f) (call-exp (var-exp 'f) (const-exp 7))))))
 ```
+
+```
 SOURCE:
 let f = proc(x)(x - 11) in (f (f 7))
 
