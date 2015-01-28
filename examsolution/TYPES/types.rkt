@@ -90,5 +90,20 @@
 
 ;f) (%1 -> %2) -> %1
 ; This should be the solution:
-; proc (f) letrec f(x) = f x in let y = ( g ( f x) ) in (f x)
+; proc (g) letrec f(x) = f x in let y = ( g ( f x) ) in (f x)
 ;(a-program )
+
+(define f
+  (a-program 
+   (proc-exp 'g
+             (no-type)
+             (letrec-exp (no-type)
+                         'f
+                         'x
+                         (no-type)
+                         (call-exp (var-exp 'f) (var-exp 'x))
+                         (let-exp 'y 
+                                  (call-exp (var-exp 'g) 
+                                            (call-exp (var-exp 'f)
+                                                      (var-exp 'x)))
+                                  (call-exp (var-exp 'f) (var-exp 'x)))))))
